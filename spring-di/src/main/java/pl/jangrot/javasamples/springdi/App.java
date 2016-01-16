@@ -1,3 +1,4 @@
+package pl.jangrot.javasamples.springdi;
 
 public class App {
 
