@@ -1,3 +1,4 @@
 rootProject.name = 'java-samples'
 include 'spring-ioc'
+include 'hibernate-inheritance'
 
