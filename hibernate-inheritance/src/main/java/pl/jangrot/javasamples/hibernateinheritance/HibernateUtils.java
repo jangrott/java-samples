@@ -9,7 +9,7 @@ import pl.jangrot.javasamples.hibernateinheritance.singletable.Square;
 
 public class HibernateUtils {
 
-    private static HibernateUtils INSTANCE;
+    private static HibernateUtils instance;
     private SessionFactory sessionFactory;
 
     private HibernateUtils() {
@@ -17,10 +17,10 @@ public class HibernateUtils {
     }
 
     public static HibernateUtils getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new HibernateUtils();
+        if (instance == null) {
+            instance = new HibernateUtils();
         }
-        return INSTANCE;
+        return instance;
     }
 
     public Session getSession() {
