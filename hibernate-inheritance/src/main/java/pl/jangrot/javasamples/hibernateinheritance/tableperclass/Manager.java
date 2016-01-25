@@ -21,6 +21,6 @@ public class Manager extends Employee {
 
     @Override
     public String toString() {
-        return "Manager [numberOfsubordinates = " + numberOfsubordinates + "]";
+        return "Manager [numberOfsubordinates = " + numberOfsubordinates + ", " + super.toString() + "]";
     }
 }

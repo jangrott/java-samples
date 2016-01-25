@@ -14,10 +14,14 @@ public class SingleTableDemo {
                 Arrays.asList(Circle.class, Rectangle.class, Square.class)
         ).getSession();
 
+        session.beginTransaction();
+
         session.save(createCircle(0.3));
         session.save(createRectangle(100, 200));
         session.save(createSquare(50));
         session.save(createCircle(0.6));
+
+        session.getTransaction().commit();
 
         List<Shape> shapes = session.createQuery(
                 "from pl.jangrot.javasamples.hibernateinheritance.singletable.Shape"
