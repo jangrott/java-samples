@@ -3,13 +3,16 @@ package pl.jangrot.javasamples.hibernateinheritance.singletable;
 import org.hibernate.Session;
 import pl.jangrot.javasamples.hibernateinheritance.HibernateUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SingleTableDemo {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-        Session session = HibernateUtils.getInstance().getSession();
+        Session session = HibernateUtils.configureAndGetInstance(
+                Arrays.asList(Circle.class, Rectangle.class, Square.class)
+        ).getSession();
 
         session.save(createCircle(0.3));
         session.save(createRectangle(100, 200));
