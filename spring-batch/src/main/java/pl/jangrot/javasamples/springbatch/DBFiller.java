@@ -1,22 +1,20 @@
 package pl.jangrot.javasamples.springbatch;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
-@Controller
-public class PersonController {
+@Component
+public class DBFiller {
 
     @Autowired
     private PersonRepository repository;
 
-    @RequestMapping("/create")
-    public ResponseEntity<Void> create() {
+    @Scheduled(fixedRate = 10000)
+    public void createPerson() {
         repository.save(createPersonWithRandomNameAndSurname());
-        return ResponseEntity.ok().build();
     }
 
     private Person createPersonWithRandomNameAndSurname() {

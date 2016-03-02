@@ -11,6 +11,7 @@ import org.springframework.batch.item.database.support.SqlPagingQueryProviderFac
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
+import org.springframework.batch.item.file.transform.LineAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -82,7 +83,6 @@ public class BatchConfiguration {
         };
     }
 
-
     private PagingQueryProvider queryProvider() throws Exception {
         SqlPagingQueryProviderFactoryBean providerFactoryBean = new SqlPagingQueryProviderFactoryBean();
         providerFactoryBean.setSelectClause("select id, name, surname");
@@ -92,7 +92,7 @@ public class BatchConfiguration {
         return providerFactoryBean.getObject();
     }
 
-    private DelimitedLineAggregator lineAggregator() {
+    private LineAggregator lineAggregator() {
         DelimitedLineAggregator delimitedLineAggregator = new DelimitedLineAggregator();
         delimitedLineAggregator.setDelimiter(",");
         BeanWrapperFieldExtractor<Person> fieldExtractor = new BeanWrapperFieldExtractor<>();
