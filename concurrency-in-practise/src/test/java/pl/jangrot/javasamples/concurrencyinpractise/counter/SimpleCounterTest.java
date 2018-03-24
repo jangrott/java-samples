@@ -40,6 +40,6 @@ public class SimpleCounterTest {
 
         Executors.newFixedThreadPool(4).invokeAll(increments);
 // not thread-safe implementation
-//        assertThat(counter.get()).isEqualTo(numOfThreads);
+//        assertThat(counter.get()).isEqualTo(numOfThreads); // FAILED
     }
 }
