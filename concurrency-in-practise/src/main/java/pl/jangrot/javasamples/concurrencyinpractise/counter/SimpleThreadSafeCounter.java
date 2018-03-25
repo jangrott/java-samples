@@ -1,7 +1,5 @@
 package pl.jangrot.javasamples.concurrencyinpractise.counter;
 
-import pl.jangrot.javasamples.concurrencyinpractise.Counter;
-
 public class SimpleThreadSafeCounter implements Counter {
 
     private long value;

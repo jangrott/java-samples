@@ -1,4 +1,4 @@
-package pl.jangrot.javasamples.concurrencyinpractise;
+package pl.jangrot.javasamples.concurrencyinpractise.counter;
 
 public interface Counter {
 

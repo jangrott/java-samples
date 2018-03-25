@@ -2,7 +2,6 @@ package pl.jangrot.javasamples.concurrencyinpractise.counter;
 
 import org.junit.Before;
 import org.junit.Test;
-import pl.jangrot.javasamples.concurrencyinpractise.Counter;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,7 +1,5 @@
 package pl.jangrot.javasamples.concurrencyinpractise.counter;
 
-import pl.jangrot.javasamples.concurrencyinpractise.Counter;
-
 import java.util.concurrent.atomic.AtomicLong;
 
 public class AtomicLongCounter implements Counter {
