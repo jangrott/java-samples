@@ -11,23 +11,23 @@ import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LockOrderingAvoidDeadlockTest {
+public class TryLockLockOrderingAvoidDeadlockTest {
 
-    private static final int NUM_OF_THREADS = 2000;
+    private static final int NUM_OF_THREADS = 80000;
 
-    private LockOrderingAvoidDeadlock underTest;
+    private TryLockLockOrderingAvoidDeadlock underTest;
 
     @Before
     public void setUp() {
-        underTest = new LockOrderingAvoidDeadlock();
+        underTest = new TryLockLockOrderingAvoidDeadlock();
     }
 
     @Test
-    public void singleThread() {
-        Account fromAccount = new Account();
+    public void singleThread() throws InterruptedException {
+        AccountWithLock fromAccount = new AccountWithLock();
         fromAccount.credit(BigDecimal.valueOf(100.04));
 
-        Account toAccount = new Account();
+        AccountWithLock toAccount = new AccountWithLock();
         toAccount.credit(BigDecimal.valueOf(80.22));
 
         underTest.transfer(fromAccount, toAccount, BigDecimal.valueOf(21.99));
@@ -38,29 +38,29 @@ public class LockOrderingAvoidDeadlockTest {
 
     @Test
     public void multiThread() throws InterruptedException {
-        Account fromAccount = new Account();
+        AccountWithLock fromAccount = new AccountWithLock();
         fromAccount.credit(BigDecimal.valueOf(1000000.55));
 
-        Account toAccount = new Account();
+        AccountWithLock toAccount = new AccountWithLock();
         toAccount.credit(BigDecimal.valueOf(500000.55));
 
-        Collection<Callable<Void>> tasks = new ArrayList<>(NUM_OF_THREADS);
+        Collection<Callable<Boolean>> tasks = new ArrayList<>(NUM_OF_THREADS);
 
         for (int i = 0; i < NUM_OF_THREADS; i++) {
-            tasks.add(() -> underTest.transfer(fromAccount, toAccount, BigDecimal.valueOf(10.00)));
-            tasks.add(() -> underTest.transfer(toAccount, fromAccount, BigDecimal.valueOf(20.00)));
+            tasks.add(() -> underTest.transfer(fromAccount, toAccount, BigDecimal.valueOf(1.00)));
+            tasks.add(() -> underTest.transfer(toAccount, fromAccount, BigDecimal.valueOf(2.00)));
         }
 
         Executors.newFixedThreadPool(4).invokeAll(tasks);
 
-        assertThat(fromAccount.getBalance()).isEqualTo(BigDecimal.valueOf(1020000.55));
-        assertThat(toAccount.getBalance()).isEqualTo(BigDecimal.valueOf(480000.55));
+        assertThat(fromAccount.getBalance()).isEqualTo(BigDecimal.valueOf(1080000.55));
+        assertThat(toAccount.getBalance()).isEqualTo(BigDecimal.valueOf(420000.55));
     }
 
     @Test(expected = IllegalStateException.class)
-    public void throwsExceptionIfInsufficientFunds() {
-        Account accountWithZeroBalance = new Account();
-        Account toAccount = new Account();
+    public void throwsExceptionIfInsufficientFunds() throws InterruptedException {
+        AccountWithLock accountWithZeroBalance = new AccountWithLock();
+        AccountWithLock toAccount = new AccountWithLock();
 
         underTest.transfer(accountWithZeroBalance, toAccount, BigDecimal.valueOf(19.99));
     }
