@@ -1,6 +1,7 @@
 package pl.jangrot.javasamples.concurrencyinpractise.counter;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class SimpleCounterTest {
     }
 
     @Test
-    public void singleThreadTest() {
+    public void singleThread() {
         counter.increment();
         counter.increment();
         counter.increment();
@@ -28,8 +29,9 @@ public class SimpleCounterTest {
         assertThat(counter.get()).isEqualTo(3);
     }
 
+    @Ignore // not thread-safe implementation
     @Test
-    public void multiThreadTest() throws InterruptedException {
+    public void multiThread() throws InterruptedException {
         int numOfThreads = 2000;
 
         Collection<Callable<Long>> increments = new ArrayList<>(numOfThreads);
@@ -38,7 +40,7 @@ public class SimpleCounterTest {
         }
 
         Executors.newFixedThreadPool(4).invokeAll(increments);
-// not thread-safe implementation
-//        assertThat(counter.get()).isEqualTo(numOfThreads); // FAILED
+
+        assertThat(counter.get()).isEqualTo(numOfThreads); // FAILED
     }
 }

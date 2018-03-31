@@ -20,7 +20,7 @@ public class SimpleThreadSafeCounterTest {
     }
 
     @Test
-    public void singleThreadTest() {
+    public void singleThread() {
         counter.increment();
         counter.increment();
         counter.increment();
@@ -29,7 +29,7 @@ public class SimpleThreadSafeCounterTest {
     }
 
     @Test
-    public void multiThreadTest() throws InterruptedException {
+    public void multiThread() throws InterruptedException {
         int numOfThreads = 2000;
 
         Collection<Callable<Long>> increments = new ArrayList<>(numOfThreads);
