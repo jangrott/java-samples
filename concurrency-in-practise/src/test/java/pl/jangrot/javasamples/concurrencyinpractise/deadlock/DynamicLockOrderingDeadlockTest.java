@@ -37,7 +37,7 @@ public class DynamicLockOrderingDeadlockTest {
         assertThat(toAccount.getBalance()).isEqualTo(BigDecimal.valueOf(102.21));
     }
 
-    @Ignore // This test should fails as it will take more than 3 second due to deadlock
+    @Ignore // This test should fail as it will take more than 3 second due to deadlock
     @Test(timeout = 3000)
     public void multiThread() throws InterruptedException {
         Account fromAccount = new Account();

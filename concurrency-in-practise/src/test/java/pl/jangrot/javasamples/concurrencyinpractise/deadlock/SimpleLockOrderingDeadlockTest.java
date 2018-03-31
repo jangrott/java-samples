@@ -18,7 +18,7 @@ public class SimpleLockOrderingDeadlockTest {
         underTest = new SimpleLockOrderingDeadlock();
     }
 
-    @Ignore // This test should fails as it will take more than 3 second due to deadlock
+    @Ignore // This test should fail as it will take more than 3 second due to deadlock
     @Test(timeout = 3000)
     public void multiThread() throws InterruptedException {
         int numOfThreads = 1000;
