@@ -2,7 +2,7 @@ package pl.jangrot.javasamples.concurrencyinpractise.deadlock;
 
 import java.math.BigDecimal;
 
-public class FundTransfer {
+public class LockOrderingAvoidDeadlock {
 
     private static final Object TIE_LOCK = new Object();
 

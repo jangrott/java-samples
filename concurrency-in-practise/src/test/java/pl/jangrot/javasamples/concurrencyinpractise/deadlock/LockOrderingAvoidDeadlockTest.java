@@ -11,15 +11,15 @@ import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FundTransferTest {
+public class LockOrderingAvoidDeadlockTest {
 
     private static final int NUM_OF_THREADS = 2000;
 
-    private FundTransfer underTest;
+    private LockOrderingAvoidDeadlock underTest;
 
     @Before
     public void setUp() {
-        underTest = new FundTransfer();
+        underTest = new LockOrderingAvoidDeadlock();
     }
 
     @Test
